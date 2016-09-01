@@ -1,7 +1,6 @@
 # RecyclerViewCardGallery
 
-## App capture
-![RecyclerViewCardGallery.gif](http://7xqerh.com1.z0.glb.clouddn.com/RecyclerViewCardGallery.gif)
+![RecyclerViewCardGallery.gif](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
 
 ## Usage
 
@@ -21,7 +20,7 @@ mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 ```
 
 ## Apk download
-[app_debug.apk](./art/app_debug.apk)
+[app_debug.apk](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/app-debug.apk)
 
 ## Reference
 [LinearSnapHelper源码解析](http://huazhiyuan2008.github.io/2016/09/01/LinearSnapHelper源码解析)
