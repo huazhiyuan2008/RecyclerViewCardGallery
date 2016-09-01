@@ -12,7 +12,7 @@ import android.util.AttributeSet;
  */
 public class SpeedRecyclerView extends RecyclerView {
     private static final float FLING_SCALE_DOWN_FACTOR = 0.5f; // 减速因子
-    private static final int FLING_MAX_VELOCITY = 6000; // 最大顺时滑动速度
+    private static final int FLING_MAX_VELOCITY = 8000; // 最大顺时滑动速度
 
     public SpeedRecyclerView(Context context) {
         super(context);
