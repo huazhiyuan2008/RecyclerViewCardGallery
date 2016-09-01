@@ -1,4 +1,4 @@
-package com.view.jameson.androidrecyclerviewcard;
+package com.view.jameson.library;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

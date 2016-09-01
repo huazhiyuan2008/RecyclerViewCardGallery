@@ -1,6 +1,7 @@
-package com.view.jameson.androidrecyclerviewcard;
+package com.view.jameson.library;
 
 import android.content.Context;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -10,7 +11,7 @@ import jameson.io.library.util.ScreenUtil;
 /**
  * Created by jameson on 8/30/16.
  */
-public class PageScaleHelper {
+public class CardScaleHelper {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
@@ -37,7 +38,7 @@ public class PageScaleHelper {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                // dx>0 则表示右滑, dx<0 表示左滑, dy <0 表示上滑, dy>0 表示下滑
+                // dx>0则表示右滑, dx<0表示左滑, dy<0表示上滑, dy>0表示下滑
                 mCurrentItemOffset += dx;
                 computeCurrentItemPos();
                 LogUtils.v(String.format("dx=%s, dy=%s, mScrolledX=%s", dx, dy, mCurrentItemOffset));
@@ -46,6 +47,7 @@ public class PageScaleHelper {
         });
 
         initWidth();
+        new LinearSnapHelper().attachToRecyclerView(mRecyclerView);
     }
 
     /**
