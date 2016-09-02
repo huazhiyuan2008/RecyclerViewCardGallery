@@ -27,6 +27,8 @@ public class CardScaleHelper {
     private int mCurrentItemOffset;
 
     public void attachToRecyclerView(RecyclerView mRecyclerView) {
+        // 开启log会影响滑动体验, 调试时才开启
+        LogUtils.mLogEnable = false;
         this.mRecyclerView = mRecyclerView;
         mContext = mRecyclerView.getContext();
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
