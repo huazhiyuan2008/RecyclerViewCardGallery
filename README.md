@@ -30,4 +30,4 @@ mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 [RecyclerViewCardGallery.gif](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery_GPU.gif)
 
 ## Reference
-[LinearSnapHelper源码解析](http://huazhiyuan2008.github.io/2016/09/01/LinearSnapHelper源码解析)
+[使用RecyclerView实现Gallery画廊效果](http://huazhiyuan2008.github.io/2016/09/02/使用RecyclerView实现Gallery画廊效果)
