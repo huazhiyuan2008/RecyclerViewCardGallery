@@ -1,8 +1,8 @@
 package com.view.jameson.library;
 
 import android.content.Context;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import jameson.io.library.util.LogUtils;
@@ -26,7 +26,9 @@ public class CardScaleHelper {
     private int mCurrentItemPos;
     private int mCurrentItemOffset;
 
-    public void attachToRecyclerView(RecyclerView mRecyclerView) {
+    private CardLinearSnapHelper mLinearSnapHelper = new CardLinearSnapHelper();
+
+    public void attachToRecyclerView(final RecyclerView mRecyclerView) {
         // 开启log会影响滑动体验, 调试时才开启
         LogUtils.mLogEnable = false;
         this.mRecyclerView = mRecyclerView;
@@ -35,6 +37,11 @@ public class CardScaleHelper {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mLinearSnapHelper.mNoNeedToScroll = mCurrentItemOffset == 0 || mCurrentItemOffset == getDestItemOffset(mRecyclerView.getAdapter().getItemCount() - 1);
+                } else {
+                    mLinearSnapHelper.mNoNeedToScroll = false;
+                }
             }
 
             @Override
@@ -49,7 +56,7 @@ public class CardScaleHelper {
         });
 
         initWidth();
-        new LinearSnapHelper().attachToRecyclerView(mRecyclerView);
+        mLinearSnapHelper.attachToRecyclerView(mRecyclerView);
     }
 
     /**
@@ -62,7 +69,6 @@ public class CardScaleHelper {
                 mCardGalleryWidth = mRecyclerView.getWidth();
                 mCardWidth = mCardGalleryWidth - ScreenUtil.dip2px(mContext, 2 * (mPagePadding + mShowLeftCardWidth));
                 mOnePageWidth = mCardWidth;
-                mCurrentItemOffset = getDestItemOffset(mCurrentItemPos);
                 mRecyclerView.smoothScrollToPosition(mCurrentItemPos);
                 onScrolledChangedCallback();
             }
