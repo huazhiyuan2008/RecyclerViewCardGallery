@@ -2,7 +2,7 @@
 
 RecyclerView实现Card Gallery效果，替代ViewPager方案。能够快速滑动并最终定位到居中位置
 
-![RecyclerViewCardGallery.gif](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
+![RecyclerViewCardGallery.gif](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery_blur.gif)
 
 录制效果有点渣，见谅~ 可下载[apk](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/app-debug.apk?raw=true)自己玩
 
