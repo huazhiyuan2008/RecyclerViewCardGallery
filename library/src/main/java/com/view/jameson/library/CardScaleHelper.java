@@ -63,6 +63,7 @@ public class CardScaleHelper {
                 mCardWidth = mCardGalleryWidth - ScreenUtil.dip2px(mContext, 2 * (mPagePadding + mShowLeftCardWidth));
                 mOnePageWidth = mCardWidth;
                 mCurrentItemOffset = getDestItemOffset(mCurrentItemPos);
+                mRecyclerView.smoothScrollToPosition(mCurrentItemPos);
                 onScrolledChangedCallback();
             }
         });
@@ -70,6 +71,10 @@ public class CardScaleHelper {
 
     public void setCurrentItemPos(int currentItemPos) {
         this.mCurrentItemPos = currentItemPos;
+    }
+
+    public int getCurrentItemPos() {
+        return mCurrentItemPos;
     }
 
     private int getDestItemOffset(int destPos) {
