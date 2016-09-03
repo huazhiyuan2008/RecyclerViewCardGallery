@@ -20,12 +20,8 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private List<Integer> mList = new ArrayList<>();
     private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
 
-    public CardAdapter() {
-        for (int i = 0; i < 10; i++) {
-            mList.add(R.drawable.pic4);
-            mList.add(R.drawable.pic5);
-            mList.add(R.drawable.pic6);
-        }
+    public CardAdapter(List<Integer> mList) {
+        this.mList = mList;
     }
 
     @Override

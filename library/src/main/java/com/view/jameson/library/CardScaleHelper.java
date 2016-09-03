@@ -79,6 +79,10 @@ public class CardScaleHelper {
         this.mCurrentItemPos = currentItemPos;
     }
 
+    public int getCurrentItemPos() {
+        return mCurrentItemPos;
+    }
+
     private int getDestItemOffset(int destPos) {
         return mOnePageWidth * destPos;
     }
