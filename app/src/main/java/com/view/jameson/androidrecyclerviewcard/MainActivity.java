@@ -1,9 +1,9 @@
 package com.view.jameson.androidrecyclerviewcard;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -15,7 +15,7 @@ import com.view.jameson.library.CardScaleHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private RecyclerView mRecyclerView;
     private ImageView mBlurView;
