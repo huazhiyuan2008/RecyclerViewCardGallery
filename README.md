@@ -6,9 +6,9 @@
 
 RecyclerView实现循环banner，替代ViewPager方案。能够快速滑动并最终定位到居中位置
 
-![RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/art/RecyclerViewCardGallery.gif)
+![RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
 
-录制效果有点渣，见谅~ 可下载[apk](https://github.com/zjw-swun/RecyclerViewCardGallery/art/app-debug.apk?raw=true)自己玩
+录制效果有点渣，见谅~ 可下载[apk](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/app-debug.apk?raw=true)自己玩
 
 ## Usage
 
@@ -28,10 +28,10 @@ mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 ```
 
 ## Apk download
-[app_debug.apk](https://github.com/zjw-swun/RecyclerViewCardGallery/art/app-debug.apk?raw=true)
+[app_debug.apk](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/app-debug.apk?raw=true)
 
 ## GPU Render测试图
-[RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/art/RecyclerViewCardGallery_GPU.gif)
+[RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery_GPU.gif)
 
 
 
