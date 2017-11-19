@@ -14,7 +14,7 @@
         android:background="#3f000000"
         android:scaleType="centerCrop"/>
 
-    <com.view.jameson.library.SpeedRecyclerView
+    <com.view.jameson.library.BannerRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
