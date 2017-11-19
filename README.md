@@ -15,16 +15,18 @@ RecyclerView实现循环banner，替代ViewPager方案。能够快速滑动并�
 调用`new PageScaleHelper().attachToRecyclerView(mRecyclerView);`扩展RecyclerView
 ```
 final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-mRecyclerView.setLayoutManager(linearLayoutManager);
-mRecyclerView.setAdapter(new CardAdapter());
-// mRecyclerView绑定scale效果
-new CardScaleHelper().attachToRecyclerView(mRecyclerView);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setAdapter(new CardAdapter(mList));
+        // mRecyclerView绑定scale效果
+        mBannerScaleHelper = new BannerScaleHelper();
+        mBannerScaleHelper.setFirstItemPos(1000);
+        mBannerScaleHelper.attachToRecyclerView(mRecyclerView);
 ```
 
 在adapter相应的位置调用
 ```
-mCardAdapterHelper.onCreateViewHolder(parent, itemView);
-mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
+mBannerAdapterHelper.onCreateViewHolder(parent, itemView);
+mBannerAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 ```
 
 ## Apk download
