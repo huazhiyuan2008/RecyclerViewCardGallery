@@ -4,7 +4,7 @@
 [https://github.com/huazhiyuan2008/RecyclerViewCardGallery/](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/)
 感谢原作者
 
-RecyclerView实现循环banner，替代ViewPager方案。能够快速滑动并最终定位到居中位置
+RecyclerView实现循环banner，替代ViewPager方案。能够快速滑动并最终定位到居中位置(相比于原库支持了循环滑动)
 
 ![RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
 
@@ -35,7 +35,8 @@ mBannerAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount())
 ## GPU Render测试图
 [RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery_GPU.gif)
 
-
+# 关于我
+ [简书地址](http://www.jianshu.com/p/9196caea34cb)
 
 ## License
 
