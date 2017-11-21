@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import jameson.io.library.util.ScreenUtil;
 
@@ -75,15 +77,31 @@ public class BannerScaleHelper {
      * 初始化卡片宽度
      */
     private void initWidth() {
-        mRecyclerView.post(new Runnable() {
+        mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void run() {
+            public void onGlobalLayout() {
+                mRecyclerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 mCardGalleryWidth = mRecyclerView.getWidth();
                 mCardWidth = mCardGalleryWidth - ScreenUtil.dip2px(mContext, 2 * (mPagePadding + mShowLeftCardWidth));
                 mOnePageWidth = mCardWidth;
                 scrollToPosition(mFirstItemPos);
             }
         });
+    }
+
+    public void setCurrentItem(int item) {
+        setCurrentItem(item,false);
+    }
+
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        if (mRecyclerView == null) {
+            return;
+        }
+        if (smoothScroll) {
+            mRecyclerView.smoothScrollToPosition(item);
+        }else {
+            scrollToPosition(item);
+        }
     }
 
     public void scrollToPosition(int pos) {
@@ -99,7 +117,13 @@ public class BannerScaleHelper {
         mLastPos = pos;
         //认为是一次滑动停止 这里可以写滑动停止回调
         mRecyclerView.dispatchOnPageSelected(mLastPos);
-        onScrolledChangedCallback();
+        //onScrolledChangedCallback();
+        mRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                onScrolledChangedCallback();
+            }
+        });
     }
 
     public void setFirstItemPos(int firstItemPos) {
@@ -111,6 +135,9 @@ public class BannerScaleHelper {
      * RecyclerView位移事件监听, view大小随位移事件变化
      */
     private void onScrolledChangedCallback() {
+        if (mOnePageWidth == 0) {
+            return;
+        }
         int currentItemPos = getCurrentItem();
         int offset = mCurrentItemOffset - (currentItemPos - mLastPos) * mOnePageWidth;
         float percent = (float) Math.max(Math.abs(offset) * 1.0 / mOnePageWidth, 0.0001);
@@ -141,8 +168,9 @@ public class BannerScaleHelper {
         }
     }
 
-    private int getCurrentItem() {
-        return ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition() - 1;
+    public int getCurrentItem() {
+        //return ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition() - 1;
+        return mRecyclerView.getLayoutManager().getPosition(mLinearSnapHelper.findSnapView(mRecyclerView.getLayoutManager()));
     }
 
     public void setScale(float scale) {

@@ -25,6 +25,14 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         this.mList = mList;
     }
 
+    public List<Integer> getList() {
+        return mList;
+    }
+
+    public void setList(List<Integer> list) {
+        mList = list;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_card_item, parent, false);
@@ -49,6 +57,8 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public int getItemCount() {
         return Integer.MAX_VALUE;
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView mImageView;
