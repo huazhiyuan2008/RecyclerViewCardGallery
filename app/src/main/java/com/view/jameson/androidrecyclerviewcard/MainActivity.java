@@ -60,13 +60,13 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         mBannerScaleHelper.setFirstItemPos(1000);
         mBannerScaleHelper.attachToRecyclerView(mRecyclerView);
 
-        mRecyclerView.postDelayed(new Runnable() {
+      /*  mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //Log.e("TAG", "postDelayed scrollToPosition" );
                 mBannerScaleHelper.scrollToPosition(4);
             }
-        }, 2000);
+        }, 2000);*/
 
     }
 
