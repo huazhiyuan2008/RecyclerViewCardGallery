@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.view.jameson.androidrecyclerviewcard.MainActivity">
 
+
     <ImageView
         android:id="@+id/blurView"
         android:layout_width="match_parent"
@@ -14,10 +15,17 @@
         android:background="#3f000000"
         android:scaleType="centerCrop"/>
 
-    <com.view.jameson.library.SpeedRecyclerView
-        android:id="@+id/recyclerView"
+    <com.view.jameson.androidrecyclerviewcard.VpSwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_height="match_parent">
+
+        <com.view.jameson.library.BannerRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"/>
+
+    </com.view.jameson.androidrecyclerviewcard.VpSwipeRefreshLayout>
 </RelativeLayout>

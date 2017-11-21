@@ -1,32 +1,32 @@
 package com.view.jameson.androidrecyclerviewcard;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.view.jameson.androidrecyclerviewcard.util.BlurBitmapUtils;
-import com.view.jameson.androidrecyclerviewcard.util.ViewSwitchUtils;
-import com.view.jameson.library.CardScaleHelper;
+import com.view.jameson.library.BannerRecyclerView;
+import com.view.jameson.library.BannerScaleHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+/**
+ * changed by 二精-霁雪清虹 on 2017/11/19
+ */
+public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView mRecyclerView;
-    private ImageView mBlurView;
+    protected SwipeRefreshLayout mSwipeLayout;
+    private BannerRecyclerView mRecyclerView;
     private List<Integer> mList = new ArrayList<>();
-    private CardScaleHelper mCardScaleHelper = null;
-    private Runnable mBlurRunnable;
-    private int mLastPos = -1;
+    private BannerScaleHelper mBannerScaleHelper = null;
+    private CardAdapter mAdapter;
+    public static String flag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,57 +39,71 @@ public class MainActivity extends Activity {
             decorView.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.activity_main);
+        initView();
         init();
     }
 
     private void init() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             mList.add(R.drawable.pic4);
             mList.add(R.drawable.pic5);
             mList.add(R.drawable.pic6);
         }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new CardAdapter(mList));
+        mAdapter = new CardAdapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
         // mRecyclerView绑定scale效果
-        mCardScaleHelper = new CardScaleHelper();
-        mCardScaleHelper.setCurrentItemPos(2);
-        mCardScaleHelper.attachToRecyclerView(mRecyclerView);
+        mBannerScaleHelper = new BannerScaleHelper();
+        mBannerScaleHelper.setFirstItemPos(1000);
+        mBannerScaleHelper.attachToRecyclerView(mRecyclerView);
 
-        initBlurBackground();
-    }
-
-    private void initBlurBackground() {
-        mBlurView = (ImageView) findViewById(R.id.blurView);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    notifyBackgroundChange();
-                }
-            }
-        });
-
-        notifyBackgroundChange();
-    }
-
-    private void notifyBackgroundChange() {
-        if (mLastPos == mCardScaleHelper.getCurrentItemPos()) return;
-        mLastPos = mCardScaleHelper.getCurrentItemPos();
-        final int resId = mList.get(mCardScaleHelper.getCurrentItemPos());
-        mBlurView.removeCallbacks(mBlurRunnable);
-        mBlurRunnable = new Runnable() {
+      /*  mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resId);
-                ViewSwitchUtils.startSwitchBackgroundAnim(mBlurView, BlurBitmapUtils.getBlurBitmap(mBlurView.getContext(), bitmap, 15));
+                //Log.e("TAG", "postDelayed scrollToPosition" );
+                mBannerScaleHelper.scrollToPosition(4);
             }
-        };
-        mBlurView.postDelayed(mBlurRunnable, 500);
+        }, 2000);*/
+
     }
 
+    private void initView() {
+        mRecyclerView = (BannerRecyclerView) findViewById(R.id.recyclerView);
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+
+        //为SwipeRefreshLayout设置监听事件
+        mSwipeLayout.setOnRefreshListener(this);
+        //为SwipeRefreshLayout设置刷新时的颜色变化，最多可以设置4种
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+    }
+
+    @Override
+    public void onRefresh() {
+        //刷新
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //结束后停止刷新
+                mSwipeLayout.setRefreshing(false);
+                mList.clear();
+                for (int i = 0; i < 2; i++) {
+                    mList.add(R.drawable.pic6);
+                    mList.add(R.drawable.pic4);
+                }
+
+                //如果需要带缩放的scale需要调用一下，否则缩放效果会出现缩放误差
+                //mRecyclerView.smoothScrollToPosition(mBannerScaleHelper.getCurrentItem());
+                mBannerScaleHelper.setCurrentItem(mBannerScaleHelper.getCurrentItem(),true);
+
+                mAdapter.setList(mList);
+                mAdapter.notifyDataSetChanged();
+            }
+        }, 1500);
+    }
 }

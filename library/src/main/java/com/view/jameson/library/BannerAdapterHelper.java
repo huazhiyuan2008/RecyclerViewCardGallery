@@ -9,22 +9,23 @@ import jameson.io.library.util.ScreenUtil;
 /**
  * adapter中调用onCreateViewHolder, onBindViewHolder
  * Created by jameson on 9/1/16.
+ * changed by 二精-霁雪清虹 on 2017/11/19
  */
-public class CardAdapterHelper {
-    private int mPagePadding = 15;
-    private int mShowLeftCardWidth = 15;
+public class BannerAdapterHelper {
+    public static int sPagePadding = 15;
+    public static int sShowLeftCardWidth = 15;
 
     public void onCreateViewHolder(ViewGroup parent,  View itemView) {
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-        lp.width = parent.getWidth() - ScreenUtil.dip2px(itemView.getContext(), 2 * (mPagePadding + mShowLeftCardWidth));
+        lp.width = parent.getWidth() - ScreenUtil.dip2px(itemView.getContext(), 2 * (sPagePadding + sShowLeftCardWidth));
         itemView.setLayoutParams(lp);
     }
 
     public void onBindViewHolder(View itemView, final int position, int itemCount) {
-        int padding = ScreenUtil.dip2px(itemView.getContext(), mPagePadding);
+        int padding = ScreenUtil.dip2px(itemView.getContext(), sPagePadding);
         itemView.setPadding(padding, 0, padding, 0);
-        int leftMarin = position == 0 ? padding + ScreenUtil.dip2px(itemView.getContext(), mShowLeftCardWidth) : 0;
-        int rightMarin = position == itemCount - 1 ? padding + ScreenUtil.dip2px(itemView.getContext(), mShowLeftCardWidth) : 0;
+        int leftMarin = position == 0 ? padding + ScreenUtil.dip2px(itemView.getContext(), sShowLeftCardWidth) : 0;
+        int rightMarin = position == itemCount - 1 ? padding + ScreenUtil.dip2px(itemView.getContext(), sShowLeftCardWidth) : 0;
         setViewMargin(itemView, leftMarin, 0, rightMarin, 0);
     }
 
@@ -37,10 +38,10 @@ public class CardAdapterHelper {
     }
 
     public void setPagePadding(int pagePadding) {
-        mPagePadding = pagePadding;
+        sPagePadding = pagePadding;
     }
 
     public void setShowLeftCardWidth(int showLeftCardWidth) {
-        mShowLeftCardWidth = showLeftCardWidth;
+        sShowLeftCardWidth = showLeftCardWidth;
     }
 }
