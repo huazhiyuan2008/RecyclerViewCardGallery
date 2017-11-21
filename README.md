@@ -36,7 +36,7 @@ mBannerAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount())
 [RecyclerViewCardGallery.gif](https://github.com/zjw-swun/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery_GPU.gif)
 
 # 关于我
- [简书地址](http://www.jianshu.com/p/9196caea34cb)
+ [简书地址](http://www.jianshu.com/u/22bdaef2d9ef)
 
 ## License
 
