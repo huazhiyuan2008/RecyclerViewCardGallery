@@ -48,10 +48,12 @@ public class CardScaleHelper {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // dx>0则表示右滑, dx<0表示左滑, dy<0表示上滑, dy>0表示下滑
-                mCurrentItemOffset += dx;
-                computeCurrentItemPos();
-                LogUtils.v(String.format("dx=%s, dy=%s, mScrolledX=%s", dx, dy, mCurrentItemOffset));
-                onScrolledChangedCallback();
+                if(dx != 0){//去掉奇怪的内存疯涨问题
+                    mCurrentItemOffset += dx;
+                    computeCurrentItemPos();
+                    LogUtils.v(String.format("dx=%s, dy=%s, mScrolledX=%s", dx, dy, mCurrentItemOffset));
+                    onScrolledChangedCallback();
+                }
             }
         });
 
